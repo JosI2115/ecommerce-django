@@ -10,6 +10,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
 # Create your views here.
+
 def payments(request):
     body = json.loads(request.body)
     order = Order.objects.get(user=request.user, is_ordered=False, order_number=body['orderID'])
@@ -69,6 +70,8 @@ def payments(request):
     }
 
     return JsonResponse(data)
+
+
 
 def place_order(request, total=0, quantity=0):
     current_user = request.user
@@ -131,6 +134,8 @@ def place_order(request, total=0, quantity=0):
             return render(request, 'orders/payments.html', context)
     else:
         return redirect('checkout')
+
+
 
 def order_complete(request):
     order_number = request.GET.get('order_number')

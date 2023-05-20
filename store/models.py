@@ -75,6 +75,7 @@ class ReviewRating(models.Model):
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    sentiment_score = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.subject
