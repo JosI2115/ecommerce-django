@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-x%4(_&yn5q780
 # SECURITY WARNING: don't run with debug turned on in production!
 
 #DEBUG = config('DEBUG', cast=bool)
-DEBUG = 'RENDER' not in os.environ
+DEBUG = False
 
 
 #ALLOWED_HOSTS = ['ecommerce-env.eba-pr8br5qc.us-west-2.elasticbeanstalk.com']
