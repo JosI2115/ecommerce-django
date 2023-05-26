@@ -30,8 +30,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-x%4(_&yn5q780
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = config('DEBUG', cast=bool)
-#DEBUG = 'RENDER' not in os.environ
+#DEBUG = config('DEBUG', cast=bool)
+DEBUG = 'RENDER' not in os.environ
 
 
 #ALLOWED_HOSTS = ['ecommerce-env.eba-pr8br5qc.us-west-2.elasticbeanstalk.com']
@@ -162,10 +162,6 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_DIRS = [
-    'ecommerce/static'
-]
-
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
