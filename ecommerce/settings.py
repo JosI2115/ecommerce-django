@@ -111,9 +111,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 DATABASES = {
     'default': dj_database_url.config(
-        #default='django.db.backends.sqlite3',
-        ENGINE: "django.db.backends.sqlite3",
-        NAME: BASE_DIR / "db.sqlite3",
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
         conn_max_age=600
     )
 }
