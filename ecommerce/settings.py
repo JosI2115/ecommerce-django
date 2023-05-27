@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-x%4(_&yn5q780
 # SECURITY WARNING: don't run with debug turned on in production!
 
 #DEBUG = config('DEBUG', cast=bool)
-DEBUG = 'RENDER' not in os.environ
+#DEBUG = 'RENDER' not in os.environ
+DEBUG= False
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 #ALLOWED_HOSTS = ['ecommerce-env.eba-pr8br5qc.us-west-2.elasticbeanstalk.com']
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'carts',
     'orders',
     'admin_honeypot',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -159,10 +161,8 @@ STATIC_URL = '/static/'
 # Following settings only make sense on production and may break development environments.
 if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-    STATIC_ROOT = BASE_DIR /'static'
-    STATICFILES_DIRS = [
-        'ecommerce/static'
-    ]
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
