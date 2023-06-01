@@ -36,3 +36,4 @@ typing_extensions==4.6.2
 tzdata==2022.7
 urllib3==1.26.6
 whitenoise==6.4.0
+django-render==1.2
