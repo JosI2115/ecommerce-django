@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'orders',
     'admin_honeypot',
     'whitenoise.runserver_nostatic',
+    'django.core.files.storage',
 ]
 
 MIDDLEWARE = [
