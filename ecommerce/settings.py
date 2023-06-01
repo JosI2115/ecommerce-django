@@ -155,11 +155,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-#STATIC_URL = '/static/'
-#STATIC_ROOT = BASE_DIR /'static'
-#STATICFILES_DIRS = [
-#    'ecommerce/static'
-#]
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR /'static'
+STATICFILES_DIRS = [
+    'ecommerce/static'
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #STATIC_URL = '/static/'
 # Following settings only make sense on production and may break development environments.
 if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
@@ -177,23 +181,22 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     AWS_DEFAULT_ACL = 'public-read'
 
-    STATIC_LOCATION= '/static/'
+    STATIC_LOCATION= 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-    PUBLIC_MEDIA_LOCATION = '/media/'
+    PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'ecommerce.storage_backends.MediaStore'
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'ecommerce/static'),)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 #MEDIA_URL = '/media/'
 #MEDIA_ROOT = BASE_DIR /'media'
 
-#MEDIA_URL = '/media/'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
