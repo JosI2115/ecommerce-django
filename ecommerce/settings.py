@@ -35,7 +35,7 @@ DEBUG = 'RENDER' not in os.environ
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 #ALLOWED_HOSTS = ['ecommerce-env.eba-pr8br5qc.us-west-2.elasticbeanstalk.com']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://django-ecommerce-1y9d.onrender.com','*']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -184,11 +184,6 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FILE_STORAGE = 'ecommerce.media_storages.MediaStorage'
 
-# AWS S3 Media Files Configuration
-from storages.backends.s3boto3 import S3Boto3Storage
-class MediaStorage(S3Boto3Storage):
-    location = 'media'
-    file_overwrite = False
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
