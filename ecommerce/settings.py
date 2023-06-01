@@ -168,9 +168,13 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
 
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    STATICFILES_STORAGE = 'render_static.storage.RenderStaticStorage'
 
-
+RENDER_CACHE = {
+    'BACKEND': 'render_static.backends.RenderCacheBackend',
+    'LOCATION': 'default',
+}
 
 #MEDIA_URL = '/media/'
 #MEDIA_ROOT = BASE_DIR /'media'
