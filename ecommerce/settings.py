@@ -15,7 +15,6 @@ from decouple import config
 
 import os
 import dj_database_url
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,7 +57,7 @@ INSTALLED_APPS = [
     'orders',
     'admin_honeypot',
     'whitenoise.runserver_nostatic',
-    'django.core.files.storage',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -161,24 +160,41 @@ USE_TZ = True
 #STATICFILES_DIRS = [
 #    'ecommerce/static'
 #]
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 # Following settings only make sense on production and may break development environments.
 if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-RENDER_BACKEND = 'django_render.backends.RenderBackend'
+    AWS_ACCESS_KEY_ID= env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY=env('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME=env('AWS_STORAGE_BUCKET_NAME')
+
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_DEFAULT_ACL = 'public-read'
+
+    STATIC_LOCATION= 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'core.storage.backends.MediaStore'
+
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 #MEDIA_URL = '/media/'
 #MEDIA_ROOT = BASE_DIR /'media'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
