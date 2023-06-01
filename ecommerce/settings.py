@@ -185,8 +185,8 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'ecommerce.storage_backends.MediaStore'
 
-    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'ecommerce/static'),)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 #MEDIA_URL = '/media/'
