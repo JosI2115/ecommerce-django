@@ -152,6 +152,11 @@ def order_complete(request):
 
         payment = Payment.objects.get(payment_id=transID)
 
+        print(order)  # Agrega esta línea para imprimir los detalles del objeto Order
+        print(ordered_products)  # Agrega esta línea para imprimir los detalles de los productos de la orden
+        print(payment)  # Agrega esta línea para imprimir los detalles del objeto Payment
+
+
         context = {
             'order': order,
             'ordered_products': ordered_products,
