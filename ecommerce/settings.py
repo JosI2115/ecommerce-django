@@ -35,7 +35,7 @@ DEBUG = 'RENDER' not in os.environ
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 #ALLOWED_HOSTS = ['ecommerce-env.eba-pr8br5qc.us-west-2.elasticbeanstalk.com']
-ALLOWED_HOSTS = ['https://django-ecommerce-1y9d.onrender.com','*']
+ALLOWED_HOSTS = ['*']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
