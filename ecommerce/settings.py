@@ -192,25 +192,6 @@ MESSAGE_TAGS = {
     messages.ERROR : 'danger',
 }
 
-LOGGING = {
-   'version': 1,
-   'disable_existing_loggers': False,
-   'handlers': {
-      'file': {
-         'level': 'DEBUG',
-         'class': 'logging.FileHandler',
-         'filename': '/tmp/debug.log',
-      },
-   },
-   'loggers': {
-      'django': {
-         'handlers': ['file'],
-         'level': 'DEBUG',
-         'propagate': True,
-      },
-   },
-}
-
 #ANYMAIL = { "SENDGRID_API_KEY": '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', }
 #EMAIL_DEFAULT = "ecommercejajic@gmail.com"
 #EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"

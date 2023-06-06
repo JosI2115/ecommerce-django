@@ -150,8 +150,6 @@ def order_complete(request):
         for i in ordered_products:
             subtotal += i.product_price*i.quantity
 
-        payment = Payment.objects.get(payment_id=transID)
-
         context = {
             'order': order,
             'ordered_products': ordered_products,
