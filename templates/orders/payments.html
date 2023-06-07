@@ -196,7 +196,14 @@
                          })
                          .then((response) => response.json())
                          .then((data) => {
-                              window.location.href = redirect_url + '?order_number='+data.order_number+'&payment_id='+data.transID;
+
+                           var redirect_url = 'https://django-ecommerce-1y9d.onrender.com/orders/order_complete/';
+                           var order_number = data.order_number;
+                           var payment_id = data.transID;
+
+                           var url = redirect_url + '?order_number=' + order_number + '&payment_id=' + payment_id;
+                           window.location.assign(url);
+
                          });
                        }
 
