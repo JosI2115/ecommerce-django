@@ -88,13 +88,13 @@ def search(request):
 
 def submit_review(request, product_id):
     url = request.META.get('HTTP_REFERER')
-
     if request.method == 'POST':
         try:
             reviews = ReviewRating.objects.get(user__id=request.user.id, product__id=product_id)
             form = ReviewForm(request.POST, instance=reviews)
             form.save()
-            messages.success(request, '¡Muchas gracias! Tu comentario ha sido actualizado.')
+            messages.success(request, 'Muchas gracias!, tu comentario ha sido actualizado')
+            return redirect(url)
         except ReviewRating.DoesNotExist:
             form = ReviewForm(request.POST)
             if form.is_valid():
@@ -121,8 +121,5 @@ def submit_review(request, product_id):
                 # data.sentiment_score = sentiment_score
 
                 data.save()
-                messages.success(request, '¡Muchas gracias! Tu comentario ha sido enviado con éxito.')
-            else:
-                messages.error(request, 'Hubo un error al procesar el formulario.')
-
-        return redirect(url)
+                messages.success(request, 'Muchas gracias, tu comentario fue enviado con exito!')
+                return redirect(url)
