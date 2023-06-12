@@ -1037,12 +1037,11 @@ a[class*=card]:hover .title {
 }
 
 .item-logo {
-  margin-bottom: 200px;
+  margin-bottom: 20px;
   text-align: center;
 }
 .item-logo img {
-  max-height: 200px;
-  max-height: auto;
+  max-height: 65px;
 }
 
 .notify {
