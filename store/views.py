@@ -120,7 +120,7 @@ def submit_review(request, product_id):
                                 attr, value = attr_value.split('=')
                                 entry[attr] = value
                             word = values[0].split('=')[0]
-                            lexicon[word] = entry
+                            lexicon[word] = entry 
 
                 sia = SentimentIntensityAnalyzer(lexicon)
                 sentiment_scores = sia.polarity_scores(data.review)
