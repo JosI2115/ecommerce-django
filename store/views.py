@@ -107,36 +107,21 @@ def submit_review(request, product_id):
                 data.product_id = product_id
                 data.user_id = request.user.id
 
-                # Analizar el sentimiento del comentario
-                #nltk.data.path.append('SentiLex-lem-PT02.txt')
-                lexicon_path = os.path.abspath('SentiLex-lem-PT02.txt')
-
                 lexicon = {}
-                with open('SentiLex-lem-PT02.txt', 'r', encoding='utf-8') as file:
+                lexicon_path = os.path.abspath('SentiLex-lem-PT02.txt')
+                with open(lexicon_path, 'r', encoding='utf-8') as file:
                     for line in file:
                         values = line.strip().split(';')
                         if len(values) == 3:
                             word = values[0].split('=')[0].strip()  # Obtener solo la palabra, sin las anotaciones adicionales
                             sentiment = values[2].split('=')[1].strip()  # Obtener el valor de sentimiento
                             lexicon[word] = float(sentiment)
-                            
+
                 sia = SentimentIntensityAnalyzer(lexicon)
-
-
-                nltk.download('vader_lexicon')
-                sia = SentimentIntensityAnalyzer()
-                sentiment_scores = sia.polarity_scores(data.review, lang='es')
+                sentiment_scores = sia.polarity_scores(data.review)
 
                 data.sentiment_score = sentiment_scores['compound']
-                print(data.sentiment_score)
-                #review_text = form.cleaned_data['review']
-                #blob = TextBlob(review_text)
-                #sentiment_score = blob.sentiment.polarity
-
-                # Guardar el puntaje de sentimiento en la base de datos
-                # data.sentiment_score = sentiment_score
-
                 data.save()
 
-                messages.success(request, 'Muchas gracias, tu comentario fue enviado con exito!')
+                messages.success(request, '¡Muchas gracias! Tu comentario fue enviado con éxito.')
                 return redirect(url)
