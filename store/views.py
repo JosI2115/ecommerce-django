@@ -107,15 +107,20 @@ def submit_review(request, product_id):
                 data.product_id = product_id
                 data.user_id = request.user.id
 
-                lexicon = {}
                 lexicon_path = os.path.abspath('SentiLex-lem-PT02.txt')
-                with open(lexicon_path, 'r', encoding='utf-8-sig') as file:
+
+                lexicon = {}
+                with open(lexicon_path, 'r', encoding='utf-8') as file:
                     for line in file:
-                        values = line.strip().split(';')
-                        if len(values) == 3:
-                            word = values[0].split('=')[0].strip()  # Obtener solo la palabra, sin las anotaciones adicionales
-                            sentiment = values[2].split('=')[1].strip()  # Obtener el valor de sentimiento
-                            lexicon[word] = float(sentiment)
+                        line = line.strip()  # Eliminar espacios en blanco al inicio y al final de la línea
+                        if line:
+                            values = line.split(';')
+                            entry = {}
+                            for attr_value in values[1:]:
+                                attr, value = attr_value.split('=')
+                                entry[attr] = value
+                            word = values[0].split('=')[0]
+                            lexicon[word] = entry
 
                 sia = SentimentIntensityAnalyzer(lexicon)
                 sentiment_scores = sia.polarity_scores(data.review)
