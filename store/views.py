@@ -120,7 +120,7 @@ def submit_review(request, product_id):
                             sentiment = values[2].split('=')[1].strip()  # Obtener el valor de sentimiento
                             lexicon[word] = float(sentiment)
 
-                 sia = SentimentIntensityAnalyzer(lexicon)
+                  sia = SentimentIntensityAnalyzer(lexicon)
 
 
                 nltk.download('vader_lexicon')
