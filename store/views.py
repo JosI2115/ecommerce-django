@@ -114,8 +114,10 @@ def submit_review(request, product_id):
                 lexicon = {}
                 with open(lexicon_path, 'r', encoding='utf-8') as file:
                     for line in file:
-                        word, _, sentiment = line.strip().split('\t')
-                        lexicon[word] = float(sentiment)
+                        values = line.strip().split('\t')
+                        if len(values) == 3:
+                            word, _, sentiment = values
+                            lexicon[word] = float(sentiment)
 
                 sia = SentimentIntensityAnalyzer(lexicon)
 
