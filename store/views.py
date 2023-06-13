@@ -11,6 +11,7 @@ from orders.models import OrderProduct
 from nltk.sentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
 import nltk
+import os
 # Create your views here.
 def store(request, category_slug=None):
     categories = None
@@ -117,6 +118,7 @@ def submit_review(request, product_id):
                         lexicon[word] = float(sentiment)
 
                 sia = SentimentIntensityAnalyzer(lexicon)
+                print(os.getcwd())
 
 
                 nltk.download('vader_lexicon')
