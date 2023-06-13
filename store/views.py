@@ -107,18 +107,10 @@ def submit_review(request, product_id):
                 data.user_id = request.user.id
 
                 # Analizar el sentimiento del comentario
-                nltk.download('vader_lexicon')
-                sia = SentimentIntensityAnalyzer()
-                sentiment_scores = sia.polarity_scores(data.review)
+                 blob = TextBlob(data.review)
+                sentiment_score = blob.sentiment.polarity
 
-                data.sentiment_score = sentiment_scores['compound']
-                print(data.sentiment_score)
-                #review_text = form.cleaned_data['review']
-                #blob = TextBlob(review_text)
-                #sentiment_score = blob.sentiment.polarity
-
-                # Guardar el puntaje de sentimiento en la base de datos
-                # data.sentiment_score = sentiment_score
+                data.sentiment_score = sentiment_score
 
                 data.save()
 
