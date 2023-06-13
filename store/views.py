@@ -8,6 +8,7 @@ from django.db.models import Q
 from .forms import ReviewForm
 from django.contrib import messages
 from orders.models import OrderProduct
+from static
 from nltk.sentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
 import nltk
@@ -109,7 +110,7 @@ def submit_review(request, product_id):
 
                 # Analizar el sentimiento del comentario
                 #nltk.data.path.append('SentiLex-lem-PT02.txt')
-                lexicon_path = 'ecommerce/static/SentiLex-lem-PT02.txt'
+                lexicon_path = 'static/SentiLex-lem-PT02.txt'
 
                 lexicon = {}
                 with open(lexicon_path, 'r', encoding='utf-8') as file:
