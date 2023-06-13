@@ -190,16 +190,22 @@
             <p>
               {{ review.review }}
             </p>
-          </div>
-        </article>
-        {% endfor %}
+            {% if review.sentiment_score > 0.0 %}
+               <p>Sentimiento: Bueno</p>
+               {% elif review.sentiment_score < -0.0 %}
+               <p>Sentimiento: Malo</p>
+               {% else %}
+               <p>Sentimiento: Neutral</p>
+               {% endif %}
 
+                 <p>Sentiment score: {{ review.sentiment_score }}</p>
 
-      </div> <!-- col.// -->
-    </div> <!-- row.// -->
-
-
-  </div> <!-- container .//  -->
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
-{% endblock %}
+             </div>
+           </article>
+           {% endfor %}
+         </div> <!-- col.// -->
+       </div> <!-- row.// -->
+     </div> <!-- container .//  -->
+   </section>
+   <!-- ========================= SECTION CONTENT END// ========================= -->
+   {% endblock %}
