@@ -107,7 +107,7 @@ def submit_review(request, product_id):
                 data.user_id = request.user.id
 
                 # Analizar el sentimiento del comentario
-                nltk.data.path.append('store/SentiLex-lem-PT02.txt')
+                #nltk.data.path.append('SentiLex-lem-PT02.txt')
                 lexicon_path = 'SentiLex-lem-PT02.txt'
 
                 lexicon = {}
