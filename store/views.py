@@ -109,7 +109,7 @@ def submit_review(request, product_id):
 
                 lexicon = {}
                 lexicon_path = os.path.abspath('SentiLex-lem-PT02.txt')
-                with open(lexicon_path, 'r', encoding='utf-8') as file:
+                with open(lexicon_path, 'r', encoding='utf-8-sig') as file:
                     for line in file:
                         values = line.strip().split(';')
                         if len(values) == 3:
