@@ -112,7 +112,7 @@ def submit_review(request, product_id):
                 sentiment_scores = sia.polarity_scores(data.review)
 
                 data.sentiment_score = sentiment_scores['compound']
-
+                print(review.sentiment_score)
                 #review_text = form.cleaned_data['review']
                 #blob = TextBlob(review_text)
                 #sentiment_score = blob.sentiment.polarity
@@ -121,5 +121,6 @@ def submit_review(request, product_id):
                 # data.sentiment_score = sentiment_score
 
                 data.save()
+                return render(request, 'product_detail.html', {'review': data})
                 messages.success(request, 'Muchas gracias, tu comentario fue enviado con exito!')
                 return redirect(url)
