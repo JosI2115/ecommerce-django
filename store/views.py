@@ -107,7 +107,7 @@ def submit_review(request, product_id):
                 data.user_id = request.user.id
 
                 # Analizar el sentimiento del comentario
-                 blob = TextBlob(data.review)
+                blob = TextBlob(data.review)
                 sentiment_score = blob.sentiment.polarity
 
                 data.sentiment_score = sentiment_score
