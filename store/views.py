@@ -116,11 +116,11 @@ def submit_review(request, product_id):
                     for line in file:
                         values = line.strip().split(';')
                         if len(values) == 3:
-                            word = values[0].split('=')[0]  # Obtener solo la palabra, sin las anotaciones adicionales
-                            sentiment = values[2].split('=')[1]  # Obtener el valor de sentimiento
+                            word = values[0].split('=')[0].strip()  # Obtener solo la palabra, sin las anotaciones adicionales
+                            sentiment = values[2].split('=')[1].strip()  # Obtener el valor de sentimiento
                             lexicon[word] = float(sentiment)
 
-                sia = SentimentIntensityAnalyzer(lexicon)
+                 sia = SentimentIntensityAnalyzer(lexicon)
 
 
                 nltk.download('vader_lexicon')
