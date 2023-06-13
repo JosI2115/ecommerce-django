@@ -107,9 +107,21 @@ def submit_review(request, product_id):
                 data.user_id = request.user.id
 
                 # Analizar el sentimiento del comentario
+                nltk.data.path.append('static\SentiLex-lem-PT02.txt')
+                lexicon_path = 'SentiLex-lem-PT02.txt'
+
+                lexicon = {}
+                with open(lexicon_path, 'r', encoding='utf-8') as file:
+                    for line in file:
+                        word, _, sentiment = line.strip().split('\t')
+                        lexicon[word] = float(sentiment)
+
+                sia = SentimentIntensityAnalyzer(lexicon)
+
+
                 nltk.download('vader_lexicon')
                 sia = SentimentIntensityAnalyzer()
-                sentiment_scores = sia.polarity_scores(data.review)
+                sentiment_scores = sia.polarity_scores(data.review, lang='es')
 
                 data.sentiment_score = sentiment_scores['compound']
                 print(data.sentiment_score)
