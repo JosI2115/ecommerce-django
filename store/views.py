@@ -109,7 +109,7 @@ def submit_review(request, product_id):
 
                 # Analizar el sentimiento del comentario
                 #nltk.data.path.append('SentiLex-lem-PT02.txt')
-                lexicon_path = 'SentiLex-lem-PT02.txt'
+                lexicon_path = 'ecommerce/static/SentiLex-lem-PT02.txt'
 
                 lexicon = {}
                 with open(lexicon_path, 'r', encoding='utf-8') as file:
@@ -118,7 +118,6 @@ def submit_review(request, product_id):
                         lexicon[word] = float(sentiment)
 
                 sia = SentimentIntensityAnalyzer(lexicon)
-                print(os.getcwd())
 
 
                 nltk.download('vader_lexicon')
