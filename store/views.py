@@ -107,25 +107,11 @@ def submit_review(request, product_id):
                 data.product_id = product_id
                 data.user_id = request.user.id
 
-                lexicon_path = os.path.abspath('SentiLex-lem-PT02.txt')
+                # Realizar análisis de sentimientos en español
+                blob = TextBlob(data.review)
+                sentiment_score = blob.sentiment.polarity
 
-                lexicon = {}
-                with open(lexicon_path, 'r', encoding='utf-8') as file:
-                    for line in file:
-                        line = line.strip()  # Eliminar espacios en blanco al inicio y al final de la línea
-                        if line:
-                            values = line.split(';')
-                            entry = {}
-                            for attr_value in values[1:]:
-                                attr, value = attr_value.split('=')
-                                entry[attr] = value
-                            word = values[0].split('=')[0]
-                            lexicon[word] = entry 
-
-                sia = SentimentIntensityAnalyzer(lexicon)
-                sentiment_scores = sia.polarity_scores(data.review)
-
-                data.sentiment_score = sentiment_scores['compound']
+                data.sentiment_score = sentiment_score
                 data.save()
 
                 messages.success(request, '¡Muchas gracias! Tu comentario fue enviado con éxito.')
