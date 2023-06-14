@@ -11,7 +11,6 @@ from orders.models import OrderProduct
 from nltk.sentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
 import nltk
-import os
 # Create your views here.
 def store(request, category_slug=None):
     categories = None
@@ -107,12 +106,21 @@ def submit_review(request, product_id):
                 data.product_id = product_id
                 data.user_id = request.user.id
 
-                # Realizar análisis de sentimientos en español
-                blob = TextBlob(data.review)
-                sentiment_score = blob.sentiment.polarity
+                # Analizar el sentimiento del comentario
+                nltk.download('vader_lexicon')
+                sia = SentimentIntensityAnalyzer()
+                sentiment_scores = sia.polarity_scores(data.review)
 
-                data.sentiment_score = sentiment_score
+                data.sentiment_score = sentiment_scores['compound']
+                print(data.sentiment_score)
+                #review_text = form.cleaned_data['review']
+                #blob = TextBlob(review_text)
+                #sentiment_score = blob.sentiment.polarity
+
+                # Guardar el puntaje de sentimiento en la base de datos
+                # data.sentiment_score = sentiment_score
+
                 data.save()
 
-                messages.success(request, '¡Muchas gracias! Tu comentario fue enviado con éxito.')
+                messages.success(request, 'Muchas gracias, tu comentario fue enviado con exito!')
                 return redirect(url)
