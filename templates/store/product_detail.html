@@ -176,13 +176,29 @@
               <h6 class="mb-1">{{ review.user.full_name }}</h6>
               <div class="rating-star">
                   <span>
-                        <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
-                        <i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
-                        <i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
-                        <i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
-                        <i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+                    {% if review.sentiment_score < -0.9 %}
+                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= -0.9 and review.sentiment_score < -0.7 %}
+                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= -0.7 and review.sentiment_score < -0.4 %}
+                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= -0.4 and review.sentiment_score < -0.2 %}
+                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= -0.2 and review.sentiment_score < 0.0 %}
+                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= 0.0 and review.sentiment_score < 0.2 %}
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= 0.2 and review.sentiment_score < 0.4 %}
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= 0.4 and review.sentiment_score < 0.7 %}
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= 0.7 and review.sentiment_score < 0.9 %}
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    {% elif review.sentiment_score >= 0.9 %}
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    {% endif %}
                   </span>
-              </div>
+                </div>
             </div>
           </div> <!-- icontext.// -->
           <div class="mt-3">
