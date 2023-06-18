@@ -9,6 +9,7 @@ from .forms import ReviewForm
 from django.contrib import messages
 from orders.models import OrderProduct
 from nltk.sentiment import SentimentIntensityAnalyzer
+from nltk.tokenize import sent_tokenize
 from textblob import TextBlob
 import nltk
 # Create your views here.
@@ -108,6 +109,7 @@ def submit_review(request, product_id):
 
                 # Analizar el sentimiento del comentario
                 nltk.download('vader_lexicon')
+                nltk.download('punkt')
                 sia = SentimentIntensityAnalyzer()
                 sentiment_scores = sia.polarity_scores(data.review)
 
