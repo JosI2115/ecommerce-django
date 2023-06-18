@@ -12,7 +12,7 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from nltk.tokenize import sent_tokenize
 from textblob import TextBlob
 import nltk
-from googletrans import Translator
+from translate import Translator
 # Create your views here.
 def store(request, category_slug=None):
     categories = None
@@ -104,8 +104,8 @@ def submit_review(request, product_id):
                 data.subject = form.cleaned_data['subject']
                 data.rating = form.cleaned_data['rating']
                 data.review = form.cleaned_data['review']
-                translator = Translator()
-                translated_review = translator.translate(data.review, dest='en').text
+                translator = Translator(to_lang='en', from_lang='es')
+                translated_review = translator.translate(data.review)
                 data.review = translated_review
                 data.ip = request.META.get('REMOTE_ADDR')
                 data.product_id = product_id
