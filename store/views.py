@@ -13,6 +13,7 @@ from nltk.tokenize import sent_tokenize
 from textblob import TextBlob
 import nltk
 from translate import Translator
+from googletrans import Translator
 # Create your views here.
 def store(request, category_slug=None):
     categories = None
@@ -104,8 +105,8 @@ def submit_review(request, product_id):
                 data.subject = form.cleaned_data['subject']
                 data.rating = form.cleaned_data['rating']
                 data.review = form.cleaned_data['review']
-                translator = Translator(from_lang='spanish', to_lang='english')
-                translated_review = translator.translate(data.review)
+                translator = Translator()
+                translated_review = translator.translate(data.review, dest='en').text
                 data.review = translated_review
                 data.ip = request.META.get('REMOTE_ADDR')
                 data.product_id = product_id
