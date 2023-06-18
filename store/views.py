@@ -12,7 +12,6 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from nltk.tokenize import sent_tokenize
 from textblob import TextBlob
 import nltk
-from translate import Translator
 from googletrans import Translator
 # Create your views here.
 def store(request, category_slug=None):
