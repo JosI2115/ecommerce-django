@@ -105,8 +105,13 @@ def submit_review(request, product_id):
                 #data.rating = form.cleaned_data['rating']
                 data.review = form.cleaned_data['review']
                 translator = Translator(to_lang='en', from_lang='es')
-                translated_review = translator.translate(data.review)
-                data.translated_review = translated_review  # Reseña traducida en inglés
+                translated_review = translator.translate(review_text)
+
+                data.review = review_text  # Almacena la reseña original en español
+                data.translated_review = translated_review  # Almacena la traducción en inglés
+
+
+                data.review = translated_review
                 data.ip = request.META.get('REMOTE_ADDR')
                 data.product_id = product_id
                 data.user_id = request.user.id
@@ -115,7 +120,7 @@ def submit_review(request, product_id):
                 nltk.download('vader_lexicon')
                 nltk.download('punkt')
                 sia = SentimentIntensityAnalyzer()
-                sentiment_scores = sia.polarity_scores(data.translated_review)
+                sentiment_scores = sia.polarity_scores(translated_review)  # Analizar la versión traducida
 
                 data.sentiment_score = sentiment_scores['compound']
                 print(data.sentiment_score)
