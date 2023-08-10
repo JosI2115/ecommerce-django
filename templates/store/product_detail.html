@@ -247,7 +247,10 @@
           <div class="mt-3">
             <h6>{{ review.subject }}</h6>
             <p>
-              {{ review.review }}
+              Original: {{ review.review }}
+            </p>
+            <p>
+              Translated: {{ review.translated_review }}
             </p>
 
             {% if review.sentiment_score > 0.0 %}
