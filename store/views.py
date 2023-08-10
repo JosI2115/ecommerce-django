@@ -130,4 +130,4 @@ def submit_review(request, product_id):
                 data.save()
 
                 messages.success(request, 'Muchas gracias, tu comentario fue enviado con exito!')
-                return redirect(url)
+                return render(request, 'product_detail.html', {'review': data})
