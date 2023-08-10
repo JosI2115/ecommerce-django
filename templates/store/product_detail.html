@@ -249,21 +249,23 @@
             <p id="translated-review"></p>
 
             <script>
-              var reviewText = "{{ data.review }}";  // Asegúrate de que 'data.review' contenga la reseña en inglés
+              var reviewText = "{{ review.review }}";  // Asegúrate de que 'review.review' contenga la reseña en inglés
+              var targetLanguage = "es";  // Idioma de destino (español)
 
               // Llamada a la API de Google Translate
-              fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=es&dt=t&q=" + encodeURI(reviewText))
-                .then(response => response.json())
-                .then(data => {
-                    var translatedText = data[0][0][0];
-                    var translatedReviewElement = document.getElementById("translated-review");
-                    translatedReviewElement.textContent = translatedText;
-                  })
-                  .catch(error => {
-                    console.error("Error during translation:", error);
-                  });
-                </script>
-
+              fetch("https://translation.googleapis.com/language/translate/v2?key=YOUR_API_KEY&q=" + encodeURI(reviewText) + "&source=en&target=" + targetLanguage, {
+                method: "POST"
+              })
+              .then(response => response.json())
+              .then(data => {
+                var translatedText = data.data.translations[0].translatedText;
+                var translatedReviewElement = document.getElementById("translated-review");
+                translatedReviewElement.textContent = translatedText;
+              })
+              .catch(error => {
+                console.error("Error during translation:", error);
+              });
+            </script>
 
 
             {% if review.sentiment_score > 0.0 %}
