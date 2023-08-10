@@ -247,8 +247,11 @@
           <div class="mt-3">
             <h6>{{ review.subject }}</h6>
             <p>
-              {{ review.review }}
+              {% load i18n %}  <!-- Carga la etiqueta 'trans' -->
+              {% trans review.review as translated_review %}  <!-- Traduce la reseña -->
+              {{ translated_review }}
             </p>
+
 
             {% if review.sentiment_score > 0.0 %}
             <p>Sentimiento: Bueno</p>
