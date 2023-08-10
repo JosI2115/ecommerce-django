@@ -246,9 +246,21 @@
           </div> <!-- icontext.// -->
           <div class="mt-3">
             <h6>{{ review.subject }}</h6>
-            <p>
-              {{ review.review }}
-            </p>
+            <p id="translated-review"></p>
+
+            <script>
+              // Supongamos que `review.subject` y `review.review` contienen los valores en inglés
+
+              // Llamada a la API de traducción en línea
+              function translateText(text, targetLanguage) {
+                // Lógica para llamar a la API de traducción y obtener la traducción
+                // En este ejemplo, asumimos que obtienes la traducción en la variable `translatedText`
+                return translatedText;
+              }
+
+              // Traducción de los elementos
+              document.getElementById("translated-review").innerHTML = translateText("{{ review.review }}", "es");
+            </script>
 
             {% if review.sentiment_score > 0.0 %}
             <p>Sentimiento: Bueno</p>
