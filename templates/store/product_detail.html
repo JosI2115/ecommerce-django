@@ -246,11 +246,23 @@
           </div> <!-- icontext.// -->
           <div class="mt-3">
             <h6>{{ review.subject }}</h6>
-            <p>
-              {% load translate %}  <!-- Carga la etiqueta de traducción -->
-              {% translate data.review from "en" to "es" as translated_review %}  <!-- Traduce la reseña -->
-              {{ translated_review }}  <!-- Muestra la reseña traducida -->
-            </p>
+            <p id="translated-review"></p>
+
+            <script>
+              var reviewText = "{{ data.review }}";  // Asegúrate de que 'data.review' contenga la reseña en inglés
+
+              // Llamada a la API de Google Translate
+              fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=es&dt=t&q=" + encodeURI(reviewText))
+                .then(response => response.json())
+                .then(data => {
+                    var translatedText = data[0][0][0];
+                    var translatedReviewElement = document.getElementById("translated-review");
+                    translatedReviewElement.textContent = translatedText;
+                  })
+                  .catch(error => {
+                    console.error("Error during translation:", error);
+                  });
+                </script>
 
 
 
