@@ -247,9 +247,9 @@
           <div class="mt-3">
             <h6>{{ review.subject }}</h6>
             <p>
-              {{ data.review }}
+              {{ review.review }}
             </p>
-            
+
             {% if review.sentiment_score > 0.0 %}
             <p>Sentimiento: Bueno</p>
             {% elif review.sentiment_score < -0.0 %}
