@@ -106,8 +106,7 @@ def submit_review(request, product_id):
                 data.review = form.cleaned_data['review']
                 translator = Translator(to_lang='en', from_lang='es')
                 translated_review = translator.translate(data.review)
-                data.translated_review = translated_review
-                data.review = translated_review
+                data.translated_review = translated_review  # Reseña traducida en inglés
                 data.ip = request.META.get('REMOTE_ADDR')
                 data.product_id = product_id
                 data.user_id = request.user.id
@@ -130,4 +129,4 @@ def submit_review(request, product_id):
                 data.save()
 
                 messages.success(request, 'Muchas gracias, tu comentario fue enviado con exito!')
-                return render(request, 'product_detail.html', {'review': data})
+                return redirect(url)
