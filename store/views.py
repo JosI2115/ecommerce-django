@@ -116,7 +116,7 @@ def submit_review(request, product_id):
                 nltk.download('vader_lexicon')
                 nltk.download('punkt')
                 sia = SentimentIntensityAnalyzer()
-                sentiment_scores = sia.polarity_scores(data.review)
+                sentiment_scores = sia.polarity_scores(data.translated_review)
 
                 data.sentiment_score = sentiment_scores['compound']
                 print(data.sentiment_score)
