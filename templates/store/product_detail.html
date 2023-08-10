@@ -246,11 +246,21 @@
           </div> <!-- icontext.// -->
           <div class="mt-3">
             <h6>{{ review.subject }}</h6>
-            <p>
-              {% load translate %}  <!-- Asegúrate de cargar la etiqueta de traducción -->
-              {% translate data.review from 'en' to 'es' as translated_review %}  <!-- Realiza la traducción -->
-              {{ translated_review }}  <!-- Muestra la reseña traducida -->
-            </p>
+            <p id="translated-review"></p>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdn.rawgit.com/jquery/jquery-translate/master/jquery.translate.js"></script>
+
+            <script>
+              $(document).ready(function() {
+                var reviewText = "{{ data.review }}";  // Asegúrate de que 'data.review' contenga la reseña original
+                var targetLanguage = 'es';  // Idioma de destino (español)
+
+                $.translate(reviewText, { to: targetLanguage }).done(function(translatedText) {
+                  $('#translated-review').text(translatedText);
+                });
+              });
+            </script>
 
 
             {% if review.sentiment_score > 0.0 %}
