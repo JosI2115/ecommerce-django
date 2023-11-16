@@ -251,14 +251,14 @@
             </p>
 
             {% if review.sentiment_score > 0.0 %}
-            <p>Sentimiento: Bueno</p>
+            <p>Experiencia: Buena</p>
             {% elif review.sentiment_score < -0.0 %}
-            <p>Sentimiento: Malo</p>
+            <p>Experiencia: Mala</p>
             {% else %}
-            <p>Sentimiento: Neutral</p>
+            <p>Experiencia: Neutra</p>
             {% endif %}
 
-              <p>Sentiment score: {{ review.sentiment_score }}</p>
+          <!--    <p>Sentiment score: {{ review.sentiment_score }}</p>-->
 
           </div>
         </article>
