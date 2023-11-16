@@ -41,15 +41,15 @@ class Product(models.Model):
 
 class VariationManager(models.Manager):
     def colors(self):
-        return super(VariationManager, self).filter(variation_category='color', is_active=True)
+        return super(VariationManager, self).filter(variation_category='sabor', is_active=True)
 
     def tallas(self):
-        return super(VariationManager, self).filter(variation_category='talla', is_active=True)
+        return super(VariationManager, self).filter(variation_category='relleno', is_active=True)
 
 
 variation_category_choice = (
-    ('color', 'color'),
-    ('talla', 'talla'),
+    ('sabor', 'sabor'),
+    ('relleno', 'relleno'),
 )
 
 class Variation(models.Model):
